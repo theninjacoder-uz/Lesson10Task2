@@ -42,7 +42,23 @@ public class StudentController {
     }
 
     //3. FACULTY DEKANAT
+    @GetMapping("/forFacultyDean/{facultyid}")
+    public Page<Student> getStudentListForFaculty(@PathVariable Integer facultyId,
+                                                  @RequestParam int page){
+        Pageable pageable = PageRequest.of(page, 10);
+        Page<Student> studentPage = studentRepository.findAllByGroup_FacultyId(facultyId, pageable);
+        return studentPage;
+    }
+
     //4. GROUP OWNER
+    @GetMapping("/forGroupOwner/{groupId}")
+    public Page<Student> getStudentListForGroupOwner(@PathVariable Integer groupId,
+                                                  @RequestParam int page){
+        Pageable pageable = PageRequest.of(page, 10);
+        Page<Student> studentPage = studentRepository.findAllByGroupId(groupId, pageable);
+        return studentPage;
+    }
+
 
 
 }
